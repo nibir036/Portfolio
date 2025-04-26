@@ -1,101 +1,141 @@
-import Image from "next/image";
+"use client";
+
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth) * 2 - 1;
+      const y = -(e.clientY / window.innerHeight) * 2 + 1;
+      setMouse({ x, y });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  return (
+    <motion.div
+      className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden text-white"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
+      {/* 🎨 Animated Gradient Background */}
+      <motion.div
+        className="absolute inset-0"
+        style={{
+          background: "linear-gradient(45deg, #ff6b6b, #6b6bff, #ffb86b, #6bffb8)",
+          backgroundSize: "400% 400%",
+          filter: "blur(100px)",
+        }}
+        animate={{
+          backgroundPosition: [
+            "0% 50%", "100% 50%", "50% 100%", "0% 50%"
+          ],
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 10,
+          ease: "easeInOut",
+        }}
+      />
+
+      {/* 🌟 Floating Parallax Elements with 3D Effect */}
+      <motion.div
+        className="absolute inset-0"
+        style={{ pointerEvents: "none", perspective: 1000 }} // Adds 3D depth
+        animate={{
+          x: mouse.x * 50,
+          y: mouse.y * 50,
+          rotateX: mouse.y * 15, // Rotates vertically
+          rotateY: mouse.x * 15, // Rotates horizontally
+        }}
+        transition={{ type: "spring", stiffness: 40, damping: 10 }}
+      >
+        <div className="absolute top-[10%] left-[20%] w-40 h-40 bg-white bg-opacity-20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-[15%] right-[25%] w-52 h-52 bg-yellow-500 bg-opacity-30 rounded-full blur-3xl"></div>
+        <div className="absolute top-[50%] left-[50%] w-32 h-32 bg-pink-500 bg-opacity-30 rounded-full blur-3xl"></div>
+      </motion.div>
+
+      {/* 🎭 Foreground Parallax (Text Moves Opposite) */}
+      <motion.div
+        className="relative z-10 text-center"
+        animate={{
+          x: mouse.x * -15,
+          y: mouse.y * -15,
+        }}
+        transition={{ type: "spring", stiffness: 50, damping: 15 }}
+      >
+        <motion.h1
+          className="font-chewy text-black text-5xl font-bold mb-4"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          Hey! I'm Nibir
+        </motion.h1>
+
+        <motion.p
+          className="font-chewy text-black text-lg mb-6 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 1 }}
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          Wanna play a short game?  
+          Click the button below!
+        </motion.p>
+
+        {/* 🎮 Interactive Button with Dynamic Gradient */}
+        <motion.a
+          href="/game"
+          className="font-chewy text-black px-6 py-3 text-white rounded-lg font-semibold text-lg shadow-lg transition-all duration-300 relative overflow-hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8, duration: 1 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
         >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+          <motion.div
+            className="text-black absolute inset-0"
+            style={{
+              background: "linear-gradient(45deg, #ff6b6b, #6b6bff, #ffb86b, #6bffb8)",
+              backgroundSize: "400% 400%",
+              borderRadius: "8px",
+              zIndex: -1,
+            }}
+            animate={{
+              backgroundPosition: ["0% 50%", "100% 50%", "50% 100%", "0% 50%"],
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 5,
+              ease: "easeInOut",
+            }}
           />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          Play 🎮
+        </motion.a>
+
+
+        <motion.section
+        id="about"
+        className="font-chewy mt-10 text-center max-w-2xl mx-auto px-6"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2, duration: 1 }}
+      >
+        <p className="text-lg text-black font-size-5">
+          I'm a full-stack developer passionate about BlockChain, AI, and 3D Web Experiences.
+          I love building cool stuff and learning new technologies. 
+          I'm currently working on a few projects and learning new things every day.  
+          Feel free to reach out to me if you have any questions or just want to chat!
+        </p>
+        </motion.section>
+
+      </motion.div>
+    </motion.div>
   );
 }
