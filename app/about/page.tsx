@@ -1,82 +1,62 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "framer-motion";
-import Avatar from "../components/Avatar";
+import Avatar3D from "@/app/components/About/Avatar3D";
+import ArcScroller from "@/app/components/About/ArcScroller";
+import Link from "next/link";
 
 export default function AboutPage() {
   return (
-    <div className="relative overflow-hidden bg-black text-white min-h-screen">
-      {/* Parallax Background */}
-      <motion.div
-        className="absolute inset-0 bg-[url('/circuitry.png')] bg-cover bg-center opacity-30"
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 0.5 }}
-        transition={{ duration: 1 }}
-      />
+    <main className="h-screen overflow-hidden bg-gradient-to-r from-[#1a1a2e] via-[#16213e] to-[#0f3460] bg-[length:200%_200%] animate-gradient-x flex flex-col">
+      {/* 🧑 Avatar Header */}
+      {/* <section className="pt-20 flex flex-col items-center px-4">
+        <div className="w-full max-w-3xl overflow-hidden rounded-2xl shadow-xl">
+          <Avatar3D />
+        </div>
+        <h1 className="text-4xl text-white font-bold text-center mt-6 font-chewy">
+          Nibir Islam
+        </h1>
+        <p className="text-center text-white font-light text-lg mt-2 font-chewy">
+          Programmer • Blockchain & AI Enthusiast • Creative Explorer
+        </p>
+      </section> */}
 
-      {/* Content Container */}
-      <div className="relative z-10 flex flex-col items-center py-20 px-6 md:px-20">
-        {/* Top Section */}
-        <div className="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-10">
-          {/* Profile Image */}
-          <Image
-            src="/nibir.jpg"
-            alt="Nibir"
-            width={150}
-            height={150}
-            className="rounded-full border-4 border-white shadow-lg"
-          />
-
-          {/* Name & Title */}
-          <div className="text-center md:text-left">
-            <h1 className="text-4xl font-bold">Muktadirul Islam Nibir</h1>
-            <p className="text-lg text-gray-300">Software Developer & AI Enthusiast</p>
+      {/* Main Content: Avatar Left & ArcScroller Right */}
+      <section className="flex flex-grow max-w-6xl mx-auto h-full w-full mt-12 px-4 gap-8">
+        {/* Left: Smaller Avatar (optional or can be replaced with bio, etc.) */}
+        <div className="hidden md:flex flex-col items-center w-half">
+          <div className="w-full rounded-2xl shadow-xl overflow-hidden">
+            {/* You can reuse Avatar3D here or show a profile pic or short bio */}
+            <Avatar3D />
           </div>
-
-          {/* Avatar */}
-          <Avatar />
+          <h1 className="text-4xl text-white font-bold text-center mt-6 font-chewy">
+          Muktadirul Islam Nibir
+          </h1>
+          <p className="text-center text-white font-light text-lg mt-2 font-chewy">
+            Full Stack Developer
+            <br />
+            Creative Explorer
+            <br />
+            Blockchain & AI Enthusiast
+          </p>
+          <br />
+          <br />
+          <Link href="/contact" className="hover:underline hover:text-blue-300 transition cursor-pointer font-chewy">
+          Wanna build something together? Reach out anytime.
+          </Link>
         </div>
 
-        {/* Main Content */}
-        <div className="mt-12 max-w-4xl space-y-10">
-          {/* Life Story */}
-          <motion.section
-            className="bg-white text-black p-6 rounded-lg shadow-lg"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-2xl font-bold">Life Story</h2>
-            <p>I've always been passionate about technology, AI, and blockchain. My journey started at Faujdarhat Cadet College, where I excelled academically, and now I'm pursuing a degree in Computer Science at BRAC University...</p>
-          </motion.section>
-
-          {/* Skills & Interests */}
-          <motion.section
-            className="bg-white text-black p-6 rounded-lg shadow-lg"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-2xl font-bold">Skills & Interests</h2>
-            <p>Proficient in full-stack development (MERN), Python, AI, blockchain, and more. Love playing guitar and cooking!</p>
-          </motion.section>
-
-          {/* Certifications & Awards */}
-          <motion.section
-            className="bg-white text-black p-6 rounded-lg shadow-lg"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-2xl font-bold">Certifications & Awards</h2>
-            <p>Duke of Edinburgh's Award (Bronze), 21st Century Employability Skilling Program, etc.</p>
-          </motion.section>
+        {/* Right: ArcScroller fills remaining width */}
+        <div className="flex-1 min-w-0">
+          <ArcScroller />
         </div>
-      </div>
-    </div>
+      </section>
+
+      {/* Footer */}
+      {/* <footer className="text-center py-8 text-white font-chewy">
+        <Link href="/contact" className="hover:underline hover:text-blue-300 transition cursor-pointer">
+          Wanna build something together? Reach out anytime. 🚀
+        </Link>
+      </footer> */}
+    </main>
   );
 }

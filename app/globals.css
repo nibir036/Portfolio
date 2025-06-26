@@ -17,5 +17,127 @@
 body {
   color: var(--foreground);
   background: var(--background);
+  overflow: hidden;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Spin Keyframes for each orbit icon */
+@keyframes spin-slow-0 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin-slow-1 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes spin-slow-2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin-slow-3 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes spin-slow-4 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* Glittering stars background */
+
+.stars, .stars2, .stars3 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* First layer: small stars */
+.stars {
+  background: transparent url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><circle cx='10' cy='10' r='1' fill='white' opacity='0.6'/><circle cx='50' cy='20' r='1' fill='white' opacity='0.4'/><circle cx='80' cy='90' r='1' fill='white' opacity='0.5'/></svg>") repeat;
+  animation: twinkle 10s linear infinite;
+  opacity: 0.3;
+  background-size: 100px 100px;
+}
+
+/* Second layer: medium stars */
+.stars2 {
+  background: transparent url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><circle cx='50' cy='50' r='1.5' fill='white' opacity='0.6'/><circle cx='150' cy='150' r='1.5' fill='white' opacity='0.4'/><circle cx='100' cy='30' r='1.5' fill='white' opacity='0.5'/></svg>") repeat;
+  animation: twinkle 15s linear infinite;
+  opacity: 0.2;
+  background-size: 200px 200px;
+}
+
+/* Third layer: big stars */
+.stars3 {
+  background: transparent url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><circle cx='200' cy='200' r='2' fill='white' opacity='0.6'/><circle cx='300' cy='100' r='2' fill='white' opacity='0.4'/><circle cx='100' cy='300' r='2' fill='white' opacity='0.5'/></svg>") repeat;
+  animation: twinkle 20s linear infinite;
+  opacity: 0.15;
+  background-size: 400px 400px;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Floating individual blinking stars */
+.starfield {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.15;
+  animation: blinkStar 6s infinite ease-in-out alternate;
+}
+
+.star:nth-child(3n) {
+  animation-duration: 8s;
+}
+.star:nth-child(4n) {
+  animation-duration: 11s;
+}
+.star:nth-child(5n) {
+  animation-duration: 14s;
+}
+
+@keyframes blinkStar {
+  0%   { opacity: 0.05; transform: scale(1); }
+  50%  { opacity: 0.4; transform: scale(1.4); }
+  100% { opacity: 0.05; transform: scale(1); }
 }
