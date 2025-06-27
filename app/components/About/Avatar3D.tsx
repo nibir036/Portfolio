@@ -4,6 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
 import { useEffect } from "react";
 
+useGLTF.preload("/models/nibir-avatar.glb");
 // 🎮 3D Model with Animation Playback
 function Model(props: any) {
   const { scene, animations } = useGLTF("/models/nibir-avatar.glb");
@@ -35,4 +36,4 @@ export default function Avatar3D() {
 }
 
 // ✅ Preload the 3D model to avoid flicker
-useGLTF.preload("/models/nibir-avatar.glb");
+

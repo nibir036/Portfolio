@@ -11,25 +11,25 @@ const images = [
 
 const orbitIcons = [
   {
-    href: "https://linkedin.com/in/your-link",
+    href: "https://www.linkedin.com/in/nibir036/",
     icon: "/icons/linkedin.svg",
     alt: "LinkedIn",
     size: 36,
   },
   {
-    href: "https://github.com/your-github",
+    href: "https://github.com/nibir036",
     icon: "/icons/github.svg",
     alt: "GitHub",
     size: 36,
   },
   {
-    href: "https://wa.me/your-number",
+    href: "https://wa.me/+8801829953813",
     icon: "/icons/whatsapp.svg",
     alt: "WhatsApp",
     size: 36,
   },
   {
-    href: "https://x.com/your-twitter",
+    href: "https://x.com/nibir036",
     icon: "/icons/x.svg",
     alt: "x",
     size: 36,

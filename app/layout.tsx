@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-gray-900 text-white">
+      <body className="bg-gray-900 text-white suppressHydrationWarning={true}">
         <Navbar />  {/* Navbar appears on all pages */}
         <main className="pt-16">{children}</main> {/* Add padding to avoid navbar overlap */}
       </body>
